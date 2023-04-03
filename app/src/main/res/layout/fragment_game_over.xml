@@ -1,0 +1,194 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.anaandreis.fashiontriviatest.navigation.TitleFragment">
+
+    <data>
+        <variable
+            name="gameViewModel"
+            type="com.anaandreis.fashiontriviatest.ui.GameViewModel"/>
+        <variable
+            name="gameOverFragment"
+            type="com.anaandreis.fashiontriviatest.ui.GameOverFragment"/>
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.48" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <ImageView
+            android:id="@+id/circleResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:src="@drawable/elipseresult"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.61" />
+
+        <TextView
+            android:id="@+id/scoreNumberHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="@{Integer.toString(gameViewModel.correctQuestionNumberLiveData)}"
+            android:textColor="@color/background"
+            android:textSize="76sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circleResult"
+            app:layout_constraintEnd_toEndOf="@+id/circleResult"
+            app:layout_constraintStart_toStartOf="@+id/circleResult"
+            app:layout_constraintTop_toTopOf="@+id/circleResult"
+            tools:text="6" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/roundedrectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/resultText"
+            style="@style/mainTextStyle"
+            android:text="@string/resultsText"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.262" />
+
+        <TextView
+            android:id="@+id/areYouText2"
+            style="@style/mainTextStyle"
+            android:layout_width="424dp"
+            android:layout_height="56dp"
+            android:text="@string/anwertest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal" />
+
+        <Button
+            android:id="@+id/buttonPlay"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="@string/NewMatchButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primary"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+            app:layout_constraintVertical_bias="0.437"
+            app:strokeColor="@color/white" />
+
+        <Button
+            android:id="@+id/homeButton"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="@string/homeButton"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primary"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPlay"
+            app:strokeColor="@color/white" />
+
+        <TextView
+            android:id="@+id/finalStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:letterSpacing="-0.01"
+            android:text="@string/finalStatusValue"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view"
+            app:layout_constraintVertical_bias="0.182" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/child_friendly"
+            app:layout_constraintEnd_toEndOf="@+id/finalStatusText"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="@+id/finalStatusText"
+            app:layout_constraintTop_toBottomOf="@+id/finalStatusText" />
+
+        <TextView
+            android:id="@+id/statusResultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:letterSpacing="-0.04"
+            android:text="@string/statusResultText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:text="Fashion Baby" />
+
+        <TextView
+            android:id="@+id/outofTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:letterSpacing="-0.04"
+            android:text="@string/statusResultText"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/circleResult"
+            tools:text="@string/outoftenText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
