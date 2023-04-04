@@ -18,7 +18,7 @@
             type="com.anaandreis.fashiontriviatest.data.Look" />
         <variable
             name="lookImageId"
-            type="Integer" />
+            type="int" />
     </data>
 
 
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@{lookImageId}"
+                    tools:src="@drawable/teste_bella"
                     tools:layout_editor_absoluteX="73dp"
                     tools:layout_editor_absoluteY="147dp" />
 
@@ -91,7 +91,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@{gameViewModel.answersOptions[0]}"
                 android:clickable="@{gameViewModel.isAnswerSelected ? false : true}"
-                android:onClick="@{() -> gameFragment.checkAnswer(gameViewModel.answersOptions[0], Button1)}"
+                android:onClick="@{() -> gameFragment.checkAnswer(Button1, gameViewModel.answersOptions[0])}"
                 android:textColor="@color/secondary"
                 android:textSize="14sp"
                 app:backgroundTint="@color/background"
@@ -110,7 +110,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@{gameViewModel.answersOptions[1]}"
                 android:clickable="@{gameViewModel.isAnswerSelected ? false : true}"
-                android:onClick="@{() -> gameFragment.checkAnswer(gameViewModel.answersOptions[1], Button2)}"
+                android:onClick="@{() -> gameFragment.checkAnswer(Button2, gameViewModel.answersOptions[1])}"
                 android:textColor="@color/secondary"
                 android:textSize="14sp"
                 app:backgroundTint="@color/background"
@@ -129,7 +129,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@{gameViewModel.answersOptions[2]}"
                 android:clickable="@{gameViewModel.isAnswerSelected ? false : true}"
-                android:onClick="@{() -> gameFragment.checkAnswer(gameViewModel.answersOptions[1], Button3)}"
+                android:onClick="@{(view) -> gameFragment.checkAnswer(Button3, gameViewModel.answersOptions[2])}"
                 android:textColor="@color/secondary"
                 android:textSize="14sp"
                 app:backgroundTint="@color/background"
@@ -148,8 +148,9 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@{gameViewModel.answersOptions[3]}"
                 android:clickable="@{gameViewModel.isAnswerSelected ? false : true}"
-                android:onClick="@{() -> gameFragment.checkAnswer(gameViewModel.answersOptions[1], Button4)}"
+                android:onClick="@{(view) -> gameFragment.checkAnswer(Button4, gameViewModel.answersOptions[3])}"
                 android:textColor="@color/secondary"
+
                 android:textSize="14sp"
                 app:backgroundTint="@color/background"
                 app:layout_constraintBottom_toTopOf="@+id/nextQuestionButton"

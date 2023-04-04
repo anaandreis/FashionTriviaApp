@@ -1,7 +1,5 @@
 package com.anaandreis.fashiontriviatest.ui
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,24 +12,22 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.data.MAX_NO_OF_QUESTIONS
 import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
+import androidx.lifecycle.ViewModel
 
 
     class GameFragment : Fragment() {
 
-        private val sharedViewModel: GameViewModel by activityViewModels()
+        val sharedViewModel: GameViewModel by activityViewModels()
 
-        private lateinit var binding: FragmentGameBinding
+        lateinit var binding: FragmentGameBinding
 
-        private var imageView: ImageView? = null
+        var imageView: ImageView? = null
 
-        private var selectedButton: Button? = null
+        var selectedButton: Button? = null
 
 
         override fun onCreateView(
@@ -62,7 +58,8 @@ import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            binding?.apply {
+
+            binding.apply {
                 // Specify the fragment as the lifecycle owner
                 lifecycleOwner = viewLifecycleOwner
 
@@ -72,12 +69,14 @@ import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
                 // Assign the fragment
                 gameFragment = this@GameFragment
             }
-            sharedViewModel.currentQuestionLiveData.observe(viewLifecycleOwner) { look ->
-                binding?.lookImageId = look.image
-            }
+
+
+            imageView?.setImageResource(sharedViewModel.currentImage)
+
 
             binding.maxNoOfQuestions = MAX_NO_OF_QUESTIONS
         }
+
 
 
 
@@ -85,6 +84,8 @@ import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
             if (sharedViewModel.currentQuestionNumber < MAX_NO_OF_QUESTIONS - 1) {
                 sharedViewModel.currentQuestionNumber++
                 sharedViewModel.randomizeQuestions()
+                imageView?.setImageResource(sharedViewModel.currentImage)
+
 
                 binding.Button1.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.background)))
                 binding.Button2.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.background)))
@@ -132,9 +133,10 @@ import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
             }
         }
 
-        fun checkAnswer(answerButton: String, button: Button) {
-            val isCorrect = answerButton == sharedViewModel.correctAnswer
-            if (isCorrect) {
+        fun checkAnswer(button: Button, selectedAnswer: String) {
+
+
+            if (selectedAnswer == sharedViewModel.correctAnswer) {
                 sharedViewModel.correctQuestionNumber++
                 button.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.correct)))
             }
