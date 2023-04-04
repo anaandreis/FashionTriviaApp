@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -16,10 +15,10 @@ import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.data.MAX_NO_OF_QUESTIONS
 import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
-import androidx.lifecycle.ViewModel
 
 
-    class GameFragment : Fragment() {
+class GameFragment : Fragment() {
+
 
         val sharedViewModel: GameViewModel by activityViewModels()
 

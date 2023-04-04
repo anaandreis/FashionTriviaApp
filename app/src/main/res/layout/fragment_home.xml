@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.anaandreis.fashiontriviatest.navigation.TitleFragment">
 
+    <data>
+    <variable
+        name="gameViewModel"
+        type="com.anaandreis.fashiontriviatest.ui.GameViewModel"/>
+        <variable
+            name="homeFragment"
+            type="com.anaandreis.fashiontriviatest.ui.HomeFragment" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleConstraint"
         android:layout_width="match_parent"

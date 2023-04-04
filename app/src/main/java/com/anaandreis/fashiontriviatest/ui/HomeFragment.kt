@@ -6,25 +6,47 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
+import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
 import com.anaandreis.fashiontriviatest.databinding.FragmentHomeBinding
-
+import com.google.android.material.color.utilities.Score.score
 
 
 class HomeFragment : Fragment() {
 
+    val sharedViewModel: GameViewModel by activityViewModels()
+    lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(
-            inflater,
-            R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.buttonPlay.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment)}
+            view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment)
+        }
+
+
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        binding.apply {
+            // Specify the fragment as the lifecycle owner
+            lifecycleOwner = viewLifecycleOwner
+
+            // Assign the view model to a property in the binding class
+            gameViewModel = sharedViewModel
+
+            // Assign the fragment
+            homeFragment = this@HomeFragment
+        }
+
     }
+}
