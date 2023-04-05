@@ -63,4 +63,5 @@
     <string name="homeButton">home</string>
     <string name="outoftenText">out of 10 questions</string>
     <string name="finalStatusValue">You\'re still a:</string>
+    <string name="out_of_10_questions">Out of 10  questions</string>
 </resources>

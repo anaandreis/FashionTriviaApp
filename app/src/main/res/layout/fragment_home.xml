@@ -125,7 +125,7 @@
             tools:text="0" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/StatusImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -143,10 +143,10 @@
             android:letterSpacing="-0.04"
             android:text="@string/statusResultText"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/StatusImage"
             app:layout_constraintHorizontal_bias="0.526"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/StatusImage"
+            app:layout_constraintTop_toBottomOf="@+id/StatusImage"
             tools:text="Fashion Baby" />
 
 

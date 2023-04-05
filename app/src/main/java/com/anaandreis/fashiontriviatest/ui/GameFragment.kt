@@ -137,6 +137,7 @@ class GameFragment : Fragment() {
 
             if (selectedAnswer == sharedViewModel.correctAnswer) {
                 sharedViewModel.correctQuestionNumber++
+                sharedViewModel.saveToDataStore(1)
                 button.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.correct)))
             }
             else {

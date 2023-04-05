@@ -1,4 +1,4 @@
-package com.anaandreis.fashiontriviatest.Repository
+package com.anaandreis.fashiontriviatest.data
 
 import android.content.Context
 import android.util.Log
@@ -11,7 +11,7 @@ import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 
 
-class DataStore(context: Context) {
+class DataScore(context: Context) {
 
     val Context.myDataStore: DataStore<Preferences> by preferencesDataStore(name = "my_datastore")
 
@@ -22,7 +22,8 @@ class DataStore(context: Context) {
     }
 
     suspend fun saveToDataStore(score: Int) {
-        this@DataStore.mContext.myDataStore.edit  { preferences ->
+        Log.d("DataScore", "Saving score: $score")
+        this@DataScore.mContext.myDataStore.edit  { preferences ->
             preferences[PreferencesKeys.score] = score
         }
     }

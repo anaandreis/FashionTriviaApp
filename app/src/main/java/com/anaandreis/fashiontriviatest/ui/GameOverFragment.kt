@@ -1,6 +1,7 @@
 package com.anaandreis.fashiontriviatest.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +54,22 @@ class GameOverFragment : Fragment() {
         sharedViewModel.correctQuestionNumberLiveData.observe(viewLifecycleOwner) { value ->
             //Update UI with the new value
             this.binding.scoreNumberHome.text = "$value"
+        }
+
+        sharedViewModel.readFromDataStore.observe(
+            viewLifecycleOwner,
+        ) { score ->
+            Log.d("HomeFragment", "Score: $score")
+            when(score){
+                in 1..40 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
+                    binding.statusResultText.text = "Fashion Baby"}
+                in 41..70 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
+                    binding.statusResultText.text = "Fashion Student"}
+                in 71..120 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
+                    binding.statusResultText.text = "Fashion Savvy"}
+                in 121..400 -> {binding.StatusImage.setImageResource(R.drawable.hotel_class)
+                    binding.statusResultText.text = "Fashion Star"}
+            }
         }
     }
     }
