@@ -70,7 +70,8 @@ class GameFragment : Fragment() {
             }
 
 
-            imageView?.setImageResource(sharedViewModel.currentImage)
+            sharedViewModel.loadImageFromUrl(sharedViewModel.currentImage, imageView)
+
 
 
             binding.maxNoOfQuestions = MAX_NO_OF_QUESTIONS
@@ -83,7 +84,7 @@ class GameFragment : Fragment() {
             if (sharedViewModel.currentQuestionNumber < MAX_NO_OF_QUESTIONS - 1) {
                 sharedViewModel.currentQuestionNumber++
                 sharedViewModel.randomizeQuestions()
-                imageView?.setImageResource(sharedViewModel.currentImage)
+                sharedViewModel.loadImageFromUrl(sharedViewModel.currentImage, imageView)
 
 
                 binding.Button1.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.background)))
@@ -142,7 +143,7 @@ class GameFragment : Fragment() {
             }
             else {
                 button.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.wrong)))
-                Toast.makeText(requireContext(), "This is a toast message", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), sharedViewModel.currentDescription, Toast.LENGTH_SHORT).show()
             }
 
             binding.apply {

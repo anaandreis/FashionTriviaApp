@@ -108,6 +108,7 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:onClick="@{() -> gameOverFragment.navigateToGameFragment()}"
             app:backgroundTint="@color/primary"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"

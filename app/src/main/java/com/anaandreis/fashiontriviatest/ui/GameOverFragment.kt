@@ -27,9 +27,6 @@ class GameOverFragment : Fragment() {
             inflater,
             R.layout.fragment_game_over, container, false
         )
-        binding.buttonPlay.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_gameOverFragment_to_gameFragment)}
-
         binding.homeButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_gameOverFragment_to_homeFragment)
         }
@@ -71,6 +68,11 @@ class GameOverFragment : Fragment() {
                     binding.statusResultText.text = "Fashion Star"}
             }
         }
+    }
+
+    fun navigateToGameFragment() {
+        view?.findNavController()?.navigate(R.id.action_gameOverFragment_to_gameFragment)
+        sharedViewModel.resetForNextMatch()
     }
     }
 

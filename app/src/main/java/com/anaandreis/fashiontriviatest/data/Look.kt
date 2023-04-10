@@ -2,9 +2,10 @@ package com.anaandreis.fashiontriviatest.data
 
 
 
-data class Look (val image: Int,
-                 val designer: String,
+data class Look (val credit: String,
                  val description: String,
-                 val credit: String,
-                 val Id: Int) {}
+                 val designer: String,
+                 val Id: Int,
+                 val image_url: String,
+                 ) {}
 
