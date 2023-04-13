@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
@@ -51,6 +52,18 @@ class GameOverFragment : Fragment() {
         sharedViewModel.correctQuestionNumberLiveData.observe(viewLifecycleOwner) { value ->
             //Update UI with the new value
             this.binding.scoreNumberHome.text = "$value"
+            when(value){
+                in 1..4 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
+                    binding.areYouText2.setText(R.string.bad)
+                }
+                in 5..7 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
+                    binding.areYouText2.setText(R.string.medium)}
+                in 8..9 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
+                    binding.areYouText2.setText((R.string.good))}
+                10 -> {binding.StatusImage.setImageResource(R.drawable.hotel_class)
+                    binding.areYouText2.setText(R.string.amazing)
+                }
+            }
         }
 
         sharedViewModel.readFromDataStore.observe(

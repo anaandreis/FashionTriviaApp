@@ -1,5 +1,6 @@
 package com.anaandreis.fashiontriviatest.ui
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +18,10 @@ import com.google.android.material.color.utilities.Score.score
 
 class HomeFragment : Fragment() {
 
+
     val sharedViewModel: GameViewModel by activityViewModels()
+
+
     lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.buttonPlay.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment)
+            view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment); sharedViewModel.randomizeQuestions()
         }
 
 

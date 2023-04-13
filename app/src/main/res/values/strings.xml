@@ -62,6 +62,12 @@
     <string name="NewMatchButton">nem match</string>
     <string name="homeButton">home</string>
     <string name="outoftenText">out of 10 questions</string>
-    <string name="finalStatusValue">You\'re still a:</string>
+    <string name="finalStatusValue">Status:</string>
     <string name="out_of_10_questions">Out of 10  questions</string>
+    <string name="bad">You can do better, baby!</string>
+    <string name="medium">You\'re getting there!</string>
+    <string name="good">You\'re killing it!</string>
+    <string name="amazing">You\'re it, honey.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
