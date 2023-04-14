@@ -33,6 +33,9 @@ class HomeFragment : Fragment() {
         binding.buttonPlay.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment); sharedViewModel.randomizeQuestions()
         }
+        binding.wardrobeButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_homeFragment_to_wardrobeFragment);
+        }
 
 
         return binding.root

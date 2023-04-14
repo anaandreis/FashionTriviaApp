@@ -46,7 +46,7 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0-alpha01'
+    implementation 'com.google.android.material:material:1.9.0-beta01'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -78,14 +78,15 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.12.0"
     kapt "com.github.bumptech.glide:compiler:4.12.0"
     implementation "com.squareup.okhttp3:okhttp:3.14.9"
-    implementation ('com.github.bumptech.glide:okhttp3-integration:4.7.1'){
+    implementation ('com.github.bumptech.glide:okhttp3-integration:4.7.1') {
         exclude group: 'glide-parent'
 
         // Import the BoM for the Firebase platform
-   //     implementation platform('com.google.firebase:firebase-bom:31.3.0')
+         implementation platform('com.google.firebase:firebase-bom:31.3.0')
 
         // Add the dependency for the Firebase Authentication library
         // When using the BoM, you don't specify versions in Firebase library dependencies
-       // implementation 'com.google.firebase:firebase-auth-ktx'
+        implementation 'com.google.firebase:firebase-auth-ktx'
     }
-}
+
+    }

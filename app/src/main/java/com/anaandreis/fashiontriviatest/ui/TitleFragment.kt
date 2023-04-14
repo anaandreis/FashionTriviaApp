@@ -21,7 +21,7 @@ class TitleFragment : Fragment() {
             R.layout.fragment_title, container, false
         )
         binding.buttonPlay.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_homeFragment)}
+            view.findNavController().navigate(R.id.action_titleFragment_to_homeFragment) }
 
         binding.buttonRules.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_aboutFragment)}

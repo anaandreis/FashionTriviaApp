@@ -55,11 +55,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.694" />
 
+
         <Button
             android:id="@+id/buttonPlay"
             style="@style/Widget.Material3.Button.OutlinedButton.Icon"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="@string/playnowButton"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -69,10 +71,29 @@
             app:iconPadding="0dp"
             app:iconSize="30sp"
             app:iconTint="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+            app:strokeColor="@color/white" />
+
+        <Button
+            android:id="@+id/wardrobeButton"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="37dp"
+            android:text="MY WARDROBE"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/primary"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPlay"
+            app:layout_constraintVertical_bias="1.0"
             app:strokeColor="@color/white" />
 
         <TextView
@@ -148,6 +169,7 @@
             app:layout_constraintStart_toStartOf="@+id/StatusImage"
             app:layout_constraintTop_toBottomOf="@+id/StatusImage"
             tools:text="Fashion Baby" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,19 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.*
 import androidx.lifecycle.asLiveData
+import com.anaandreis.fashiontriviatest.MainActivity
 import com.anaandreis.fashiontriviatest.data.*
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,11 +32,12 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
+@Suppress("INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION_WARNING")
 @SuppressLint("StaticFieldLeak")
 
 class GameViewModel(application:Application): AndroidViewModel(application){
 
-    private val score = DataScore(application)
+    val score = DataScore(application)
 
     val readFromDataStore = score.readFromDataStore.asLiveData()
     //variables
@@ -49,8 +56,17 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     private lateinit var answers: MutableList<String>
     lateinit var correctAnswer: String
 
+    //authentication
+    var auth: FirebaseAuth
+    private lateinit var user: FirebaseUser
+
+
+    //List of wardrobeLooks
+    val listOfLooksWardrobe = mutableListOf<WardobreItem>()
+
     private var usedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
     private var unusedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
+    var currentId = 0
     var currentImage = ""
     var currentDescription = ""
     var currentQuestionNumber = 0
@@ -63,7 +79,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     val answersOptions: LiveData<List<String>>
         get() = _answersOptions
 
-    private val _isAnswerSelected = MutableLiveData<Boolean>(false)
+    private val _isAnswerSelected = MutableLiveData(false)
     val isAnswerSelected: LiveData<Boolean>
         get() = _isAnswerSelected
 
@@ -81,8 +97,13 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
     init {
 
+
+        FirebaseApp.initializeApp(getApplication())
+        auth = Firebase.auth
+
         viewModelScope.launch(Dispatchers.IO) {
             fetchLooks()
+            fetchWardrobe()
         }
 
     }
@@ -93,6 +114,15 @@ class GameViewModel(application:Application): AndroidViewModel(application){
         setQuestion()
 
     }
+
+
+    fun addWardrobeLooks(wardobreItem: WardobreItem) {
+        val wardrobeLooksRef = FirebaseDatabase.getInstance().getReference("wardrobelooks")
+        val wardrobeLooksId = wardrobeLooksRef.push().key
+        val wardrobeLooks = WardobreItem(wardrobeLooksId, currentImage, currentDescription)
+        wardrobeLooksRef.child(wardrobeLooksId!!).setValue(wardrobeLooks)
+    }
+
 
 
     // Firebase Storage reference object in your ViewModel that points to the folder where your images are stored.
@@ -119,8 +149,6 @@ class GameViewModel(application:Application): AndroidViewModel(application){
                 resultLiveData.value = true
                 }
 
-
-
             override fun onCancelled(error: DatabaseError) {
                 Log.e(TAG, "Failed to read value.", error.toException())
                 resultLiveData.value = false
@@ -129,6 +157,32 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
     }
 
+    fun fetchWardrobe() {
+        //getting a instance of the database
+        val databaseReference = FirebaseDatabase.getInstance().getReference("wardrobelooks")
+        //listening to a single read from the database
+        databaseReference.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (lookSnapshot in dataSnapshot.children) {
+                    val lookMap = lookSnapshot.getValue<HashMap<String, Any>>()
+                    val lookJsonString = gson.toJson(lookMap)
+                    //deserialize to turn to a LooksFromDatabaseObject
+                    val look = gson.fromJson(lookJsonString, WardobreItem::class.java)
+                    listOfLooksWardrobe.add(look)
+                }
+
+                // Move these calls outside of the for loop
+                Log.d("WARDROBE", "size of list: ${listOfLooksFirebase.size}")
+                Log.d("LISTA2", "ATÉ AQUI FOI")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "Failed to read value.", error.toException())
+            }
+        })
+
+    }
 
 
     fun setQuestion() {
@@ -150,6 +204,8 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
        // currentImage = currentLook.image
         Designers.shuffle()
+
+        currentId = currentLook.Id
 
         correctAnswer = currentLook.designer
 
@@ -174,4 +230,37 @@ class GameViewModel(application:Application): AndroidViewModel(application){
         currentQuestionNumber = 0
     }
 
+
+
+fun signInAnonymously() {
+    // [START signin_anonymously]
+    auth.signInAnonymously().addOnCompleteListener(MainActivity()) { task ->
+            if (task.isSuccessful) {
+                //Sign in success, update UI with the signed-in user's information
+                Log.d("LOADED", "signInAnonymously:success")
+                user = auth.currentUser!!
+                //updateUI(user)
+            } else {
+                //If sign in fails, display a message to the user.
+                Log.w("DIDNT LOAD", "signInAnonymously:failure", task.exception)
+                Toast.makeText(getApplication(), "Authentication failed.", Toast.LENGTH_SHORT).show()
+                //updateUI(null)
+            }
+        }
+
 }
+
+    fun decrementScore() {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            score.readFromDataStore.first().let { currentScore ->
+                if (currentScore > 9) {val updatedScore = currentScore - 10
+                score.saveToDataStore(updatedScore)
+                    addWardrobeLooks(WardobreItem(currentImage, currentDescription))
+                  Log.d("SENT", "DONE")                }
+            }
+        }
+    }
+}
+
+

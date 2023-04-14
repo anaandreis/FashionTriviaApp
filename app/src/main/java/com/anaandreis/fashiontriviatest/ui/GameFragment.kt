@@ -26,6 +26,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
+import com.anaandreis.fashiontriviatest.data.GlideApp
 import com.anaandreis.fashiontriviatest.data.MAX_NO_OF_QUESTIONS
 import com.anaandreis.fashiontriviatest.data.MyAppGlideModule
 import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
@@ -49,6 +50,9 @@ class GameFragment : Fragment() {
     var imageView: ImageView? = null
 
     var selectedButton: Button? = null
+
+    var heartButtonClicked = false
+
 
 
     override fun onCreateView(
@@ -92,16 +96,6 @@ class GameFragment : Fragment() {
         }
 
 
-        sharedViewModel.readFromDataStore.observe(
-            viewLifecycleOwner,
-        ) { score ->
-            if (score > 10) {
-                binding.heartButton.setImageResource(R.drawable.redborder)
-            } else {
-                binding.heartButton.setImageResource(R.drawable.grayheart)
-            }
-        }
-
         sharedViewModel.resultLiveData.observe(viewLifecycleOwner) { resultLiveData ->
             if (resultLiveData) {
                 sharedViewModel.randomizeQuestions()
@@ -111,12 +105,21 @@ class GameFragment : Fragment() {
             }
         }
 
+        colorHeartButton()
+        // Button click listener
+        binding.heartButton.setOnClickListener {
+            heartButtonClicked = true
+            likeTheLook()
+            colorHeartButton()
+        }
+
+
 
         binding.maxNoOfQuestions = MAX_NO_OF_QUESTIONS
     }
 
     fun setImage(currentImage: String) {
-                Glide.with(this)
+                GlideApp.with(this)
                 .load(currentImage)
                     .apply(RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
@@ -128,6 +131,8 @@ class GameFragment : Fragment() {
             sharedViewModel.currentQuestionNumber++
             sharedViewModel.randomizeQuestions()
             setImage(sharedViewModel.currentImage)
+            heartButtonClicked = false
+            colorHeartButton()
 
 
             binding.Button1.setBackgroundColor((ContextCompat.getColor(requireContext(), R.color.background)))
@@ -229,6 +234,26 @@ class GameFragment : Fragment() {
         toast.show()
     }
 
+
+    fun likeTheLook(){
+        sharedViewModel.decrementScore()
+    }
+
+
+   fun colorHeartButton() {
+       sharedViewModel.readFromDataStore.observe(
+           viewLifecycleOwner,
+       ) { score ->
+           if (heartButtonClicked && score > 9) {
+               binding.heartButton.setImageResource(R.drawable.redfull)
+               showToast("Look added to your wardrobe.")
+            } else if (!heartButtonClicked && score > 9) {
+               binding.heartButton.setImageResource(R.drawable.redborder)
+            } else if (heartButtonClicked && score < 10) {
+               binding.heartButton.setImageResource(R.drawable.grayheart)
+               showToast("You don't have enough points!")}
+       }
+   }
 
 
 

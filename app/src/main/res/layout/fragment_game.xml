@@ -192,11 +192,12 @@
 
             <ImageView
                 android:id="@+id/heartButton"
-                android:layout_width="88dp"
-                android:layout_height="64dp"
+                android:layout_width="54dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="3dp"
                 app:layout_constraintEnd_toStartOf="@+id/nextQuestionButton"
-                app:layout_constraintHorizontal_bias="0.72"
+                app:layout_constraintHorizontal_bias="0.813"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nextQuestionButton"
                 app:srcCompat="@drawable/grayheart" />

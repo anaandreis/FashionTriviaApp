@@ -53,13 +53,13 @@ class GameOverFragment : Fragment() {
             //Update UI with the new value
             this.binding.scoreNumberHome.text = "$value"
             when(value){
-                in 1..4 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
+                in 0..4 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
                     binding.areYouText2.setText(R.string.bad)
                 }
                 in 5..7 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
                     binding.areYouText2.setText(R.string.medium)}
-                in 8..9 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
-                    binding.areYouText2.setText((R.string.good))}
+                in 8..9 ->
+                {binding.areYouText2.setText((R.string.good))}
                 10 -> {binding.StatusImage.setImageResource(R.drawable.hotel_class)
                     binding.areYouText2.setText(R.string.amazing)
                 }
