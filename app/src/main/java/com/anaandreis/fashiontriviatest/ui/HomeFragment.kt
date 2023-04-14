@@ -11,9 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
-import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
 import com.anaandreis.fashiontriviatest.databinding.FragmentHomeBinding
-import com.google.android.material.color.utilities.Score.score
+
 
 
 class HomeFragment : Fragment() {
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
             view.findNavController().navigate(R.id.action_homeFragment_to_gameFragment); sharedViewModel.randomizeQuestions()
         }
         binding.wardrobeButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_wardrobeFragment);
+            view.findNavController().navigate(R.id.action_homeFragment_to_wardrobeFragment)
         }
 
 
@@ -63,14 +62,18 @@ class HomeFragment : Fragment() {
             Log.d("HomeFragment", "Score: $score")
             binding.scoreNumberHome.text = score.toString()
             when(score){
-                in 1..40 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
-                    binding.statusResultText.text = "Fashion Baby"}
-                in 41..70 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
-                    binding.statusResultText.text = "Fashion Student"}
-                in 71..120 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
-                    binding.statusResultText.text = "Fashion Savvy"}
-                in 121..400 -> {binding.StatusImage.setImageResource(R.drawable.hotel_class)
-                    binding.statusResultText.text = "Fashion Star"}
+                in 0..25 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
+                    binding.statusResultText.text = getString(R.string.fashionbaby)}
+                in 26..50 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
+                    binding.statusResultText.text = getString(R.string.fashionstudent)}
+                in 51..90 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
+                    binding.statusResultText.text = getString(R.string.fashionsavvy)}
+                else -> {
+                    if (score > 90) {
+                        binding.StatusImage.setImageResource(R.drawable.hotel_class)
+                        binding.statusResultText.text = getString(R.string.fashionstar)
+                    }
+                }
             }
         }
 

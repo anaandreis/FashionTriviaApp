@@ -25,9 +25,11 @@
             android:layout_height="605dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/balenciaga" />
+            app:srcCompat="@drawable/balenciaga"
+            android:contentDescription="@string/look_photo" />
 
         <TextView
             android:id="@+id/wardrobeText"
@@ -40,6 +42,7 @@
             android:paddingBottom="24dp"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:paddingEnd="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -51,7 +54,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove"
+            android:text="@string/remove"
             android:textColor="#9F9F9F"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

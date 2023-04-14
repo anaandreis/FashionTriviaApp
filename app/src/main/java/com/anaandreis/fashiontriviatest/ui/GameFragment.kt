@@ -1,11 +1,7 @@
 package com.anaandreis.fashiontriviatest.ui
 
 import android.graphics.Color
-import android.graphics.Color.red
-import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -17,41 +13,32 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.data.GlideApp
 import com.anaandreis.fashiontriviatest.data.MAX_NO_OF_QUESTIONS
-import com.anaandreis.fashiontriviatest.data.MyAppGlideModule
 import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.coroutines.launch
-import com.bumptech.glide.Glide.with
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.coroutines.Dispatchers
-import kotlin.math.log
+
 
 
 @Suppress("DEPRECATION")
 class GameFragment : Fragment() {
 
 
-    val sharedViewModel: GameViewModel by activityViewModels()
+    private val sharedViewModel: GameViewModel by activityViewModels()
 
     lateinit var binding: FragmentGameBinding
 
     var imageView: ImageView? = null
 
-    var selectedButton: Button? = null
+    private var selectedButton: Button? = null
 
-    var heartButtonClicked = false
+    private var heartButtonClicked = false
 
 
 
@@ -118,7 +105,7 @@ class GameFragment : Fragment() {
         binding.maxNoOfQuestions = MAX_NO_OF_QUESTIONS
     }
 
-    fun setImage(currentImage: String) {
+    private fun setImage(currentImage: String) {
                 GlideApp.with(this)
                 .load(currentImage)
                     .apply(RequestOptions()
@@ -204,7 +191,7 @@ class GameFragment : Fragment() {
 
     }
 
-    fun showToast(text: String) {
+    private fun showToast(text: String) {
 
         val toast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
 
@@ -235,12 +222,12 @@ class GameFragment : Fragment() {
     }
 
 
-    fun likeTheLook(){
+    private fun likeTheLook(){
         sharedViewModel.decrementScore()
     }
 
 
-   fun colorHeartButton() {
+   private fun colorHeartButton() {
        sharedViewModel.readFromDataStore.observe(
            viewLifecycleOwner,
        ) { score ->
@@ -251,7 +238,7 @@ class GameFragment : Fragment() {
                binding.heartButton.setImageResource(R.drawable.redborder)
             } else if (heartButtonClicked && score < 10) {
                binding.heartButton.setImageResource(R.drawable.grayheart)
-               showToast("You don't have enough points!")}
+               showToast("You\'re out points!")}
        }
    }
 

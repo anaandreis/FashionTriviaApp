@@ -1,32 +1,29 @@
 package com.anaandreis.fashiontriviatest.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anaandreis.fashiontriviatest.R
-import com.anaandreis.fashiontriviatest.data.LooksfromFirebase
 import com.anaandreis.fashiontriviatest.data.WardobreItem
 import com.anaandreis.fashiontriviatest.data.WardrobeLookAdapter
-import com.anaandreis.fashiontriviatest.databinding.FragmentWardrobeBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
+
+
 
 
 class WardrobeFragment : Fragment() {
 
-    val sharedViewModel: GameViewModel by activityViewModels()
+    private val sharedViewModel: GameViewModel by activityViewModels()
 
     private lateinit var adapter: WardrobeLookAdapter
     private var wardrobeLooks = mutableListOf<WardobreItem>()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var noLookText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +37,7 @@ class WardrobeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         wardrobeLooks = sharedViewModel.listOfLooksWardrobe
+        noLookText = view.findViewById(R.id.noLooksText)
 
         recyclerView = requireView().findViewById(R.id.recyclerView)
         // Set up the RecyclerView
@@ -47,7 +45,12 @@ class WardrobeFragment : Fragment() {
         adapter = WardrobeLookAdapter(requireContext(), wardrobeLooks)
         recyclerView.adapter = adapter
 
-        // Load the WardrobeLooks from Firebase Firestore
+        if (wardrobeLooks.isEmpty()){
+            noLookText.text = getString(R.string.wardrobeempty)
+        } else {
+            noLookText.text = ""
+        }
+
     }
 
 }

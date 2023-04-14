@@ -7,5 +7,4 @@ data class LooksfromFirebase(
     val Id: Int,
     val image_url: String,
 
-    ) {
-}
+    )

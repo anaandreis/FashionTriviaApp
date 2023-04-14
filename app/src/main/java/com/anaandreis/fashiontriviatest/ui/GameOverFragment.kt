@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
@@ -24,7 +23,7 @@ class GameOverFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<FragmentGameOverBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_game_over, container, false
         )
@@ -71,23 +70,29 @@ class GameOverFragment : Fragment() {
         ) { score ->
             Log.d("HomeFragment", "Score: $score")
             when(score){
-                in 1..40 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
-                    binding.statusResultText.text = "Fashion Baby"}
-                in 41..70 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
-                    binding.statusResultText.text = "Fashion Student"}
-                in 71..120 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
-                    binding.statusResultText.text = "Fashion Savvy"}
-                in 121..400 -> {binding.StatusImage.setImageResource(R.drawable.hotel_class)
-                    binding.statusResultText.text = "Fashion Star"}
-            }
+                in 0..25 -> {binding.StatusImage.setImageResource(R.drawable.child_friendly)
+                    binding.statusResultText.text = getString(R.string.fashionbaby)}
+                in 26..50 -> {binding.StatusImage.setImageResource(R.drawable.menu_book)
+                    binding.statusResultText.text = getString(R.string.fashionstudent)}
+                in 51..90 -> {binding.StatusImage.setImageResource(R.drawable.settings_accessibility)
+                    binding.statusResultText.text = getString(R.string.fashionsavvy)}
+                else -> {
+                    if (score > 90) {
+                        binding.StatusImage.setImageResource(R.drawable.hotel_class)
+                        binding.statusResultText.text = getString(R.string.fashionstar)
+                    }
+                }
         }
+
+    }
     }
 
     fun navigateToGameFragment() {
         view?.findNavController()?.navigate(R.id.action_gameOverFragment_to_gameFragment)
         sharedViewModel.resetForNextMatch()
-    }
-    }
+}
+}
+
 
 
 

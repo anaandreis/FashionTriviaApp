@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.databinding.FragmentAboutBinding
-import com.anaandreis.fashiontriviatest.databinding.FragmentTitleBinding
+
 
 
 

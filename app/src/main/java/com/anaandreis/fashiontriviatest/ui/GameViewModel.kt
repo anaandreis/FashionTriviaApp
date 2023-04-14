@@ -7,10 +7,6 @@ import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.*
 import androidx.lifecycle.asLiveData
 import com.anaandreis.fashiontriviatest.MainActivity
@@ -23,7 +19,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -66,7 +61,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
     private var usedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
     private var unusedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
-    var currentId = 0
+    private var currentId = 0
     var currentImage = ""
     var currentDescription = ""
     var currentQuestionNumber = 0
@@ -116,7 +111,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     }
 
 
-    fun addWardrobeLooks(wardobreItem: WardobreItem) {
+    private fun addWardrobeLooks() {
         val wardrobeLooksRef = FirebaseDatabase.getInstance().getReference("wardrobelooks")
         val wardrobeLooksId = wardrobeLooksRef.push().key
         val wardrobeLooks = WardobreItem(wardrobeLooksId, currentImage, currentDescription)
@@ -124,9 +119,8 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     }
 
 
-
     // Firebase Storage reference object in your ViewModel that points to the folder where your images are stored.
-    fun fetchLooks() {
+    private fun fetchLooks() {
         // enables offline persistence, which allows the app to store and access data from the local device cache when the app is offline.
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         //getting a instance of the database
@@ -157,7 +151,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
     }
 
-    fun fetchWardrobe() {
+    private fun fetchWardrobe() {
         //getting a instance of the database
         val databaseReference = FirebaseDatabase.getInstance().getReference("wardrobelooks")
         //listening to a single read from the database
@@ -169,6 +163,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
                     val lookJsonString = gson.toJson(lookMap)
                     //deserialize to turn to a LooksFromDatabaseObject
                     val look = gson.fromJson(lookJsonString, WardobreItem::class.java)
+                    look.id = lookSnapshot.key
                     listOfLooksWardrobe.add(look)
                 }
 
@@ -185,7 +180,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     }
 
 
-    fun setQuestion() {
+    private fun setQuestion() {
 
         if (unusedLooks.isEmpty()) {
             // Reset the used and unused sets if all looks have been used
@@ -256,7 +251,7 @@ fun signInAnonymously() {
             score.readFromDataStore.first().let { currentScore ->
                 if (currentScore > 9) {val updatedScore = currentScore - 10
                 score.saveToDataStore(updatedScore)
-                    addWardrobeLooks(WardobreItem(currentImage, currentDescription))
+                    addWardrobeLooks()
                   Log.d("SENT", "DONE")                }
             }
         }

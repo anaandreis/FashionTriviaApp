@@ -69,4 +69,13 @@
     <string name="good">You\'re killing it!</string>
     <string name="amazing">You\'re it, honey.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fashionbaby">Fashion Baby</string>
+    <string name="fashionstudent">Fashion Student</string>
+    <string name="fashionsavvy">Fashion Savvy</string>
+    <string name="fashionstar">Fashion Star</string>
+    <string name="wardrobeempty">You don\'t have any looks in your wardrobe.</string>
+    <string name="look_photo">Look photo</string>
+    <string name="remove">Remove</string>
+    <string name="my_wardrobe">MY WARDROBE</string>
+    <string name="status_image">status image</string>
 </resources>

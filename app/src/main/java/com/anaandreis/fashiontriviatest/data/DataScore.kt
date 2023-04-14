@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 class DataScore(context: Context) {
 
-    val Context.myDataStore: DataStore<Preferences> by preferencesDataStore(name = "my_datastore")
+    private val Context.myDataStore: DataStore<Preferences> by preferencesDataStore(name = "my_datastore")
 
     private val mContext = context
 

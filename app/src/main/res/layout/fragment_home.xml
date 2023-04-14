@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="37dp"
-            android:text="MY WARDROBE"
+            android:text="@string/my_wardrobe"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
@@ -154,7 +154,8 @@
             app:layout_constraintEnd_toEndOf="@+id/finalStatusText"
             app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="@+id/finalStatusText"
-            app:layout_constraintTop_toBottomOf="@+id/finalStatusText" />
+            app:layout_constraintTop_toBottomOf="@+id/finalStatusText"
+            android:contentDescription="@string/status_image" />
 
         <TextView
             android:id="@+id/statusResultText"
