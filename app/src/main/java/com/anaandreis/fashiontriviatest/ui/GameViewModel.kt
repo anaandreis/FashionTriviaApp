@@ -2,7 +2,6 @@
 package com.anaandreis.fashiontriviatest.ui
 
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -27,16 +26,12 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
-@Suppress("INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION_WARNING")
-@SuppressLint("StaticFieldLeak")
-
 class GameViewModel(application:Application): AndroidViewModel(application){
 
+
+    //DataStore variable retrieval and update
     val score = DataScore(application)
-
     val readFromDataStore = score.readFromDataStore.asLiveData()
-    //variables
-
     fun saveToDataStore(points: Int) =
         viewModelScope.launch(Dispatchers.IO) {
             score.readFromDataStore.first().let { currentScore ->
@@ -45,31 +40,33 @@ class GameViewModel(application:Application): AndroidViewModel(application){
             }
         }
 
-
-    //private lateinit var currentLook: Look
-    private lateinit var currentLook: LooksfromFirebase
-    private lateinit var answers: MutableList<String>
-    lateinit var correctAnswer: String
-
-    //authentication
+    //Firebase authentication
     var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
 
 
-    //List of wardrobeLooks
-    val listOfLooksWardrobe = mutableListOf<WardobreItem>()
+    //Gson
+    val gson = Gson()
 
-    private var usedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
-    private var unusedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
+
+    //GameFragment variables
     private var currentId = 0
     var currentImage = ""
     var currentDescription = ""
     var currentQuestionNumber = 0
+    private lateinit var currentLook: LooksfromFirebase
 
+    private lateinit var answers: MutableList<String>
+    lateinit var correctAnswer: String
+
+    val listOfLooksWardrobe = mutableListOf<WardrobeItem>()
     val listOfLooksFirebase = mutableListOf<LooksfromFirebase>()
 
-    val gson = Gson()
+    private var usedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
+    private var unusedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
 
+
+    //Livedata to feed GameFragment
     private val _answersOptions = MutableLiveData<List<String>>()
     val answersOptions: LiveData<List<String>>
         get() = _answersOptions
@@ -78,7 +75,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     val isAnswerSelected: LiveData<Boolean>
         get() = _isAnswerSelected
 
-    //the boolean that shows if the fetch looks is loaded or not
+    //Boolean that shows if the fetch looks is loaded or not
     val resultLiveData = MutableLiveData<Boolean>()
 
     val correctQuestionNumberLiveData = MutableLiveData<Int>()
@@ -88,11 +85,9 @@ class GameViewModel(application:Application): AndroidViewModel(application){
             correctQuestionNumberLiveData.value = value
         }
 
-    //initialization block
+
 
     init {
-
-
         FirebaseApp.initializeApp(getApplication())
         auth = Firebase.auth
 
@@ -114,7 +109,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
     private fun addWardrobeLooks() {
         val wardrobeLooksRef = FirebaseDatabase.getInstance().getReference("wardrobelooks")
         val wardrobeLooksId = wardrobeLooksRef.push().key
-        val wardrobeLooks = WardobreItem(wardrobeLooksId, currentImage, currentDescription)
+        val wardrobeLooks = WardrobeItem(wardrobeLooksId, currentImage, currentDescription)
         wardrobeLooksRef.child(wardrobeLooksId!!).setValue(wardrobeLooks)
     }
 
@@ -138,8 +133,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
                 }
 
                 // Move these calls outside of the for loop
-                Log.d("TAMANHO", "size of list: ${listOfLooksFirebase.size}")
-                Log.d("LISTA", "ATÉ AQUI FOI")
+                Log.d("FromDatabaseSize", "size of list: ${listOfLooksFirebase.size}")
                 resultLiveData.value = true
                 }
 
@@ -162,14 +156,13 @@ class GameViewModel(application:Application): AndroidViewModel(application){
                     val lookMap = lookSnapshot.getValue<HashMap<String, Any>>()
                     val lookJsonString = gson.toJson(lookMap)
                     //deserialize to turn to a LooksFromDatabaseObject
-                    val look = gson.fromJson(lookJsonString, WardobreItem::class.java)
+                    val look = gson.fromJson(lookJsonString, WardrobeItem::class.java)
                     look.id = lookSnapshot.key
                     listOfLooksWardrobe.add(look)
                 }
 
                 // Move these calls outside of the for loop
                 Log.d("WARDROBE", "size of list: ${listOfLooksFirebase.size}")
-                Log.d("LISTA2", "ATÉ AQUI FOI")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -189,9 +182,8 @@ class GameViewModel(application:Application): AndroidViewModel(application){
             return
         }
 
-
         //currentLook = unusedLooks.random()
-        currentLook = listOfLooksFirebase.random()
+        currentLook = unusedLooks.random()
 
         usedLooks.add(currentLook)
         unusedLooks.remove(currentLook)

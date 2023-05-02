@@ -14,7 +14,7 @@ import com.anaandreis.fashiontriviatest.R
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 
-class WardrobeLookAdapter(private val context: Context, private val wardrobeLooks: MutableList<WardobreItem>) : RecyclerView.Adapter<WardrobeLookAdapter.ViewHolder>() {
+class WardrobeLookAdapter(private val context: Context, private val wardrobeLooks: MutableList<WardrobeItem>) : RecyclerView.Adapter<WardrobeLookAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)

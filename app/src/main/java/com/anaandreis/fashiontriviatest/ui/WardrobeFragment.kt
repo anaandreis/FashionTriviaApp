@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anaandreis.fashiontriviatest.R
-import com.anaandreis.fashiontriviatest.data.WardobreItem
+import com.anaandreis.fashiontriviatest.data.WardrobeItem
 import com.anaandreis.fashiontriviatest.data.WardrobeLookAdapter
 
 
@@ -21,7 +21,7 @@ class WardrobeFragment : Fragment() {
     private val sharedViewModel: GameViewModel by activityViewModels()
 
     private lateinit var adapter: WardrobeLookAdapter
-    private var wardrobeLooks = mutableListOf<WardobreItem>()
+    private var wardrobeLooks = mutableListOf<WardrobeItem>()
     private lateinit var recyclerView: RecyclerView
     private lateinit var noLookText: TextView
 
