@@ -10,10 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anaandreis.fashiontriviatest.R
-import com.anaandreis.fashiontriviatest.data.WardrobeItem
-import com.anaandreis.fashiontriviatest.data.WardrobeLookAdapter
-
-
+import com.anaandreis.fashiontriviatest.data.models.WardrobeItem
+import com.anaandreis.fashiontriviatest.domain.GameViewModel
+import com.anaandreis.fashiontriviatest.ui.adapter.WardrobeLookAdapter
 
 
 class WardrobeFragment : Fragment() {

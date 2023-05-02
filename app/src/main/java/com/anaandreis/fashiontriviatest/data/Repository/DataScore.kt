@@ -1,4 +1,4 @@
-package com.anaandreis.fashiontriviatest.data
+package com.anaandreis.fashiontriviatest.data.Repository
 
 import android.content.Context
 import android.util.Log

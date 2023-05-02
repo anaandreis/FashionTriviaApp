@@ -1,4 +1,4 @@
-package com.anaandreis.fashiontriviatest.data
+package com.anaandreis.fashiontriviatest.data.models
 
 
 data class WardrobeItem (

@@ -14,7 +14,7 @@
             android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_thin"
+            android:fontFamily="@font/roboto_light"
             android:gravity="center_horizontal"
             android:text="@string/Title"
             android:textAllCaps="true"

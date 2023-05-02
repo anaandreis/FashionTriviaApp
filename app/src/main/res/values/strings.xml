@@ -78,4 +78,6 @@
     <string name="remove">Remove</string>
     <string name="my_wardrobe">MY WARDROBE</string>
     <string name="status_image">status image</string>
+    <string name="image">LookImage</string>
+    <string name="scoreResult">Score Result</string>
 </resources>

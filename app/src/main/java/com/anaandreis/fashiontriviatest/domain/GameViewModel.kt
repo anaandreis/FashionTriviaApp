@@ -1,5 +1,5 @@
 
-package com.anaandreis.fashiontriviatest.ui
+package com.anaandreis.fashiontriviatest.domain
 
 
 import android.app.Application
@@ -9,7 +9,11 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.lifecycle.asLiveData
 import com.anaandreis.fashiontriviatest.MainActivity
+import com.anaandreis.fashiontriviatest.data.Repository.DataScore
 import com.anaandreis.fashiontriviatest.data.*
+import com.anaandreis.fashiontriviatest.data.models.Designers
+import com.anaandreis.fashiontriviatest.data.models.LooksfromFirebase
+import com.anaandreis.fashiontriviatest.data.models.WardrobeItem
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -64,6 +68,7 @@ class GameViewModel(application:Application): AndroidViewModel(application){
 
     private var usedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
     private var unusedLooks: MutableSet<LooksfromFirebase> = mutableSetOf()
+    private var displayedItemIds = mutableSetOf<String>()
 
 
     //Livedata to feed GameFragment
@@ -158,7 +163,9 @@ class GameViewModel(application:Application): AndroidViewModel(application){
                     //deserialize to turn to a LooksFromDatabaseObject
                     val look = gson.fromJson(lookJsonString, WardrobeItem::class.java)
                     look.id = lookSnapshot.key
-                    listOfLooksWardrobe.add(look)
+                    if(!displayedItemIds.contains(look.id)) {
+                        look.id?.let { displayedItemIds.add(it) }
+                        listOfLooksWardrobe.add(look)}
                 }
 
                 // Move these calls outside of the for loop

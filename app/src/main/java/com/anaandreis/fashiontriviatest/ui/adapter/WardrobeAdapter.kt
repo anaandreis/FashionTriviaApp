@@ -1,4 +1,4 @@
-package com.anaandreis.fashiontriviatest.data
+package com.anaandreis.fashiontriviatest.ui.adapter
 
 import android.content.ContentValues
 import android.content.Context
@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anaandreis.fashiontriviatest.R
+import com.anaandreis.fashiontriviatest.data.models.WardrobeItem
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 
@@ -49,6 +50,7 @@ class WardrobeLookAdapter(private val context: Context, private val wardrobeLook
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
+
 
 fun deleteWardrobeLookFromFirebase(documentId: String?) {
     val database = FirebaseDatabase.getInstance()

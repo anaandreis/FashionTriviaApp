@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.databinding.FragmentHomeBinding
-
+import com.anaandreis.fashiontriviatest.domain.GameViewModel
 
 
 class HomeFragment : Fragment() {

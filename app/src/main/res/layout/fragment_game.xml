@@ -6,16 +6,13 @@
     <data>
     <variable
         name="gameViewModel"
-        type="com.anaandreis.fashiontriviatest.ui.GameViewModel"/>
+        type="com.anaandreis.fashiontriviatest.domain.GameViewModel"/>
         <variable
             name="maxNoOfQuestions"
             type="int" />
         <variable
             name="gameFragment"
             type="com.anaandreis.fashiontriviatest.ui.GameFragment" />
-        <variable
-            name="Look"
-            type="com.anaandreis.fashiontriviatest.data.Look" />
         <variable
             name="lookImageId"
             type="int" />
@@ -51,6 +48,7 @@
                 android:id="@+id/whiteRectangle"
                 android:layout_width="170dp"
                 android:layout_height="290dp"
+                android:contentDescription="@string/image"
                 android:src="@drawable/shapeforimageview"
                 app:layout_constraintBottom_toTopOf="@+id/questionText"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,10 +74,11 @@
                     android:id="@+id/lookImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/image"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/teste_bella"
                     tools:layout_editor_absoluteX="73dp"
-                    tools:layout_editor_absoluteY="147dp" />
+                    tools:layout_editor_absoluteY="147dp"
+                    tools:src="@drawable/teste_bella" />
 
             </androidx.cardview.widget.CardView>
 
@@ -196,6 +195,7 @@
                 android:layout_height="41dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="3dp"
+                android:contentDescription="heart Button"
                 app:layout_constraintEnd_toStartOf="@+id/nextQuestionButton"
                 app:layout_constraintHorizontal_bias="0.813"
                 app:layout_constraintStart_toStartOf="parent"

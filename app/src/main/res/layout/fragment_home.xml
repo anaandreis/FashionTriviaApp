@@ -6,7 +6,7 @@
     <data>
     <variable
         name="gameViewModel"
-        type="com.anaandreis.fashiontriviatest.ui.GameViewModel"/>
+        type="com.anaandreis.fashiontriviatest.domain.GameViewModel"/>
         <variable
             name="homeFragment"
             type="com.anaandreis.fashiontriviatest.ui.HomeFragment" />
@@ -100,7 +100,7 @@
             android:id="@+id/finalStatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
+            android:fontFamily="@font/roboto"
             android:letterSpacing="-0.01"
             android:text="@string/status"
             android:textSize="20sp"
@@ -114,6 +114,7 @@
         <TextView
             android:id="@+id/scoreText"
             style="@style/scoreThinStatus"
+            android:fontFamily="@font/roboto"
             android:text="@string/score"
             app:layout_constraintBottom_toTopOf="@+id/scoreNumberHome"
             app:layout_constraintEnd_toStartOf="@+id/guideline_vertical"
@@ -124,6 +125,7 @@
             android:id="@+id/pointsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:letterSpacing="-0.04"
             android:text="@string/pointsText"
             android:textSize="16sp"
@@ -162,6 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_bold"
             android:letterSpacing="-0.04"
             android:text="@string/statusResultText"
             android:textSize="16sp"

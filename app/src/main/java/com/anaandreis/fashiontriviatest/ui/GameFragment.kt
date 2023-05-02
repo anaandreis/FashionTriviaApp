@@ -21,6 +21,7 @@ import com.anaandreis.fashiontriviatest.R
 import com.anaandreis.fashiontriviatest.data.GlideApp
 import com.anaandreis.fashiontriviatest.data.MAX_NO_OF_QUESTIONS
 import com.anaandreis.fashiontriviatest.databinding.FragmentGameBinding
+import com.anaandreis.fashiontriviatest.domain.GameViewModel
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 

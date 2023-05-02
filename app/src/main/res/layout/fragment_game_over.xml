@@ -6,7 +6,7 @@
     <data>
         <variable
             name="gameViewModel"
-            type="com.anaandreis.fashiontriviatest.ui.GameViewModel"/>
+            type="com.anaandreis.fashiontriviatest.domain.GameViewModel"/>
         <variable
             name="gameOverFragment"
             type="com.anaandreis.fashiontriviatest.ui.GameOverFragment"/>
@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.9"
+            android:contentDescription="@string/scoreResult"
             android:src="@drawable/elipseresult"
             app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
             app:layout_constraintEnd_toEndOf="parent"

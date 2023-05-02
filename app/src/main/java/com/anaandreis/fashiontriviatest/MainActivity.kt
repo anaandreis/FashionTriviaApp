@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.anaandreis.fashiontriviatest.databinding.ActivityMainBinding
-import com.anaandreis.fashiontriviatest.ui.GameViewModel
+import com.anaandreis.fashiontriviatest.domain.GameViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
